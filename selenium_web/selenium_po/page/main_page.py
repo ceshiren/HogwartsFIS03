@@ -11,7 +11,7 @@ from selenium_web.selenium_po.page.contact_page import ContactPage
 
 # 首页
 class MainPage(BasePage):
-    _base_url = "https://work.weixin.qq.com/wework_admin/frame"
+    _driver_base = "https://work.weixin.qq.com/wework_admin/frame"
 
     def goto_contact_page(self):
         self.find(By.ID, "menu_contacts").click()

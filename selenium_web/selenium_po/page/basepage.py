@@ -10,20 +10,21 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePage:
-    _base_url = ""
+    _driver_base = ""
 
-    def __init__(self, _base_url: WebDriver = None):
-        # 避免driver重复初始化
-        if _base_url is None:
+    def __init__(self, _driver_base: WebDriver = None):
+        # 避免driver重复初始化，第一次初始化的时候，driver是空的，所以走到了
+        # if的逻辑
+        if _driver_base is None:
             opt = webdriver.ChromeOptions()
             opt.debugger_address = "127.0.0.1:9222"
             self.driver = webdriver.Chrome(options=opt)
             self.driver.implicitly_wait(10)
         else:
-            self.driver = _base_url
+            self.driver = _driver_base
 
-        if self._base_url != "":
-            self.driver.get(self._base_url)
+        if self._driver_base != "":
+            self.driver.get(self._driver_base)
 
     def find(self, by, locator):
         return self.driver.find_element(by, locator)
