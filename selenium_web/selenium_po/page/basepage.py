@@ -10,7 +10,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class BasePage:
-    _driver_base = ""
+    _base_url = ""
 
     def __init__(self, _driver_base: WebDriver = None):
         # 避免driver重复初始化，第一次初始化的时候，driver是空的，所以走到了
@@ -23,8 +23,8 @@ class BasePage:
         else:
             self.driver = _driver_base
 
-        if self._driver_base != "":
-            self.driver.get(self._driver_base)
+        if self._base_url != "":
+            self.driver.get(self._base_url)
 
     def find(self, by, locator):
         return self.driver.find_element(by, locator)
