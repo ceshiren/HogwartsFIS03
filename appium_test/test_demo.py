@@ -51,4 +51,24 @@ class TestDemo:
         r = self.driver.find_element_by_id("com.tencent.wework:id/mn").text
         assert "外出打卡成功" == r
 
+    def test_member(self):
+        self.driver.find_element_by_xpath("//*[@text='通讯录']").click()
+        # 滚动查找元素
+        self.driver.find_element(MobileBy.ANDROID_UIAUTOMATOR,
+                                 'new UiScrollable(new UiSelector().'
+                                 'scrollable(true).instance(0)).'
+                                 'scrollIntoView(new UiSelector().'
+                                 'text("添加成员").instance(0));').click()
+        self.driver.find_element_by_xpath("//*[@text='手动输入添加']").click()
+        self.driver.find_element_by_xpath("//*[contains(@text,'姓名')]/../android.widget.EditText").send_keys("abc3")
+        self.driver.find_element_by_xpath("//*[@text='男']").click()
+        self.driver.find_element_by_xpath("//*[@text='女']").click()
+        self.driver.find_element_by_id("com.tencent.wework:id/eq7").send_keys("18900000003")
+        self.driver.find_element_by_id("com.tencent.wework:id/gur").click()
+        # mytoast = self.driver.find_element_by_xpath("//*[@text='添加成功']").text
+        # mytoast = self.driver.find_element_by_xpath("//*[@class='android.widget.Toast']").text
+        # assert "添加成功" == mytoast
+        failetext = self.driver.find_element_by_xpath("//*[contains(@text,'手机已存在于通讯录')]").text
+        assert failetext == "手机已存在于通讯录，无法添加"
+
 

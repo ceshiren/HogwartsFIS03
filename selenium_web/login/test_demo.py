@@ -60,6 +60,8 @@ def test_login():
   with open("data.yaml",encoding="utf-8") as f:
     yaml_date = yaml.safe_load(f)
   for cookie in yaml_date:
+    if "expiry" in cookie.keys():
+      cookie.pop("expiry")
     # 把cookie传给driver
     driver.add_cookie(cookie)
   # 设置cookie后，再次访问企业微信
